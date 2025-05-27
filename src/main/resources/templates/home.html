@@ -5,8 +5,20 @@
     <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
-    <h1>Welcome to Home Page!</h1>
-    <button onclick="sayHi()">Click Me</button>
+    <h1>Welcome to Book Store!</h1>
+    <ul>
+        <li th:each="book: ${books}">
+            <strong th:text="${book.title}">Book Title:</strong>
+        </li>
+    </ul>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+    
+    <div th:if="${param.logout}">
+        <p style="color:green">Logged out successfully</p>
+    </div>
+    
     <script src="/js/home.js"></script>
 </body>
 </html>
