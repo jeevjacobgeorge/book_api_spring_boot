@@ -31,7 +31,9 @@ public class UserService {
             user.setUsername(userDto.getUsername()); //TODO: handle null 
             user.setEmail(userDto.getEmail());
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            return userRepository.save(user);
+            User res = userRepository.save(user);
+            // int a = 5/0;   // to simulate runtime exception 
+            return res;
       }
 
       

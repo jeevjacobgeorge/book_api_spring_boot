@@ -1,5 +1,6 @@
 package com.example.bookapi.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -16,15 +17,16 @@ public class AuthorService {
             this.authorRepository = authorRepository;
       }
 
+      @Transactional(rollbackFor = Exception.class )
+      public Author createAuthor(Author author){
+            return authorRepository.save(author);
+      }
+
       @Transactional(readOnly = true)
       public Optional<Author> getAuthorById(Long id){
             return authorRepository.findById(id);
       }
 
-      @Transactional(rollbackFor = Exception.class )
-      public void createAuthor(Author author){
-            authorRepository.save(author);
-      }
 
       // public updateAuthor(Author author){
       //       author
@@ -36,5 +38,15 @@ public class AuthorService {
             authorRepository.deleteById(id);
       }
 
+      @Transactional(readOnly = true)
+
+      public List<Author> findAuthorStartingWithA(){
+            return authorRepository.findAuthorStartingWithA();
+      }
+
+      @Transactional(readOnly = true)
+      public Long countAuthors(){
+            return authorRepository.countAuthors();
+      }
       
 }
